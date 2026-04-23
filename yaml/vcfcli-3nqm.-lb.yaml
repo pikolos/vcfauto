@@ -1,0 +1,14 @@
+apiVersion: vmoperator.vmware.com/v1alpha3
+kind: VirtualMachineService
+metadata:
+  name: vcfcli-3nqm-lb
+  namespace: greg01-b2y9g
+spec:
+  selector:
+    vcfcli-3nqm-vm: vm-lb-selector
+  type: LoadBalancer
+  ports:
+    - name: ssh
+      protocol: TCP
+      port: 22
+      targetPort: 22

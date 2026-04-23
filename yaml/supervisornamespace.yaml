@@ -1,0 +1,20 @@
+apiVersion: infrastructure.cci.vmware.com/v1alpha2
+kind: SupervisorNamespace
+metadata:
+  generateName: greg02
+  namespace: gregory-oldyck
+spec:
+  className: small
+  description: ""
+  regionName: arn
+  vpcName: vpc-n05d
+  initialClassConfigOverrides:
+    zones:
+      - name: arn-w01-cl01
+        cpuLimit: 10000M
+        cpuReservation: 0M
+        memoryLimit: 10000Mi
+        memoryReservation: 0Mi
+    storageClasses:
+      - name: "vSAN Default Storage Policy"
+        limit: 100000Mi

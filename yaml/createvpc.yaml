@@ -1,0 +1,37 @@
+apiVersion: vpc.nsx.vmware.com/v1alpha1
+kind: VPC
+metadata:
+  name: vpc-n05d
+  namespace: nemea
+spec:
+  description: ""
+  regionName: arn
+  privateIPs:
+    - 10.0.0.0/20
+  limitNames: []
+  loadBalancerVPCEndpoint:
+    enabled: false
+
+---
+apiVersion: vpc.nsx.vmware.com/v1alpha1
+kind: VPCAttachment
+metadata:
+  name: "vpc-n05d:default"
+  namespace: nemea
+
+spec:
+  vpcName: vpc-n05d
+  regionName: arn
+  vpcConnectivityProfileName: "default@arn"
+
+---
+apiVersion: vpc.nsx.vmware.com/v1alpha1
+kind: LoadBalancer
+metadata:
+  name: "vpc-n05d:vpc-lb-n05d"
+  namespace: nemea
+  annotations:
+    vpc.nsx.vmware.com/allow-auto-relocation: "true"
+spec:
+  vpcName: vpc-n05d
+  regionName: arn
