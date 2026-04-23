@@ -1,2 +1,2 @@
 # vcfauto
-now with gpg signature
+now with gpg signature commit
