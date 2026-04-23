@@ -1,3 +1,16 @@
+apiVersion: crd.nsx.vmware.com/v1alpha1
+kind: Subnet
+metadata:
+  name: vcfcli-3nqm-subnet
+  namespace: greg01-b2y9g
+spec:
+  accessMode: PrivateTGW
+  subnetDHCPConfig:
+    mode: DHCPServer
+  ipv4SubnetSize: 16
+  ipAddresses: []
+
+---
 apiVersion: vmoperator.vmware.com/v1alpha3
 kind: VirtualMachineService
 metadata:
@@ -32,7 +45,7 @@ spec:
     interfaces:
       - name: eth0
         network:
-          name: subnet-s4cw
+          name: vcfcli-3nqm-subnet
           kind: Subnet
   bootstrap:
     cloudInit:

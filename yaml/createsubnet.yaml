@@ -1,7 +1,7 @@
 apiVersion: crd.nsx.vmware.com/v1alpha1
 kind: Subnet
 metadata:
-  name: subnet-nz4l
+  name: vcfcli-3nqm-subnet
   namespace: greg01-b2y9g
 spec:
   accessMode: PrivateTGW
