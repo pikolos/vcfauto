@@ -8,8 +8,8 @@ resource "kubernetes_manifest" "vcfcli_subnet" {
     apiVersion = "crd.nsx.vmware.com/v1alpha1"
     kind       = "Subnet"
     metadata = {
-      name      = "vcfcli-3nqm-subnet"
-      namespace = "greg01-b2y9g"
+      name      = "${var.name_prefix}-subnet"
+      namespace = var.namespace
     }
     spec = {
       accessMode = "PrivateTGW"
@@ -30,12 +30,12 @@ resource "kubernetes_manifest" "vcfcli_lb" {
     apiVersion = "vmoperator.vmware.com/v1alpha3"
     kind       = "VirtualMachineService"
     metadata = {
-      name      = "vcfcli-3nqm-lb"
-      namespace = "greg01-b2y9g"
+      name      = "${var.name_prefix}-lb"
+      namespace = var.namespace
     }
     spec = {
       selector = {
-        "vcfcli-3nqm-vm" = "vm-lb-selector"
+        "${var.name_prefix}-vm" = "vm-lb-selector"
       }
       type = "LoadBalancer"
       ports = [
@@ -61,11 +61,11 @@ resource "kubernetes_manifest" "vcfcli_vm" {
     apiVersion = "vmoperator.vmware.com/v1alpha3"
     kind       = "VirtualMachine"
     metadata = {
-      name      = "vcfcli-3nqm-vm"
-      namespace = "greg01-b2y9g"
+      name      = "${var.name_prefix}-vm"
+      namespace = var.namespace
       labels = {
-        "vm-selector"    = "vcfcli-3nqm-vm"
-        "vcfcli-3nqm-vm" = "vm-lb-selector"
+        "vm-selector"           = "${var.name_prefix}-vm"
+        "${var.name_prefix}-vm" = "vm-lb-selector"
       }
     }
     spec = {
@@ -79,7 +79,7 @@ resource "kubernetes_manifest" "vcfcli_vm" {
           {
             name = "eth0"
             network = {
-              name = "vcfcli-3nqm-subnet"
+              name = "${var.name_prefix}-subnet"
               kind = "Subnet"
             }
           }
@@ -107,17 +107,4 @@ resource "kubernetes_manifest" "vcfcli_vm" {
       }
     }
   }
-}
-
-# retrieve the generated name:
-output "generated_vm_name" {
-  value = kubernetes_manifest.vcfcli_vm.object.metadata.name
-}
-
-output "generated_subnet_name" {
-  value = kubernetes_manifest.vcfcli_subnet.object.metadata.name
-}
-
-output "generated_lb_name" {
-  value = kubernetes_manifest.vcfcli_lb.object.metadata.name
 }
