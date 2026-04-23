@@ -1,2 +1,2 @@
 # vcfauto
-now with signature
+now with gpg signature
