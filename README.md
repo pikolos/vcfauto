@@ -1,1 +1,2 @@
 # vcfauto
+now with signature
