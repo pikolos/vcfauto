@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Secret
+stringData:
+  username: pgadmin
+  password: password
+metadata:
+  name: secret-1778140556035
+  namespace: greg01-b2y9g
+
+---
+apiVersion: databases.dataservices.vmware.com/v1alpha1
+kind: PostgresCluster
+spec:
+  adminUsername: pgadmin
+  databaseName: gregorydb
+  version: '17'
+  storageSpace: 60Gi
+  storagePolicyName: vSAN Default Storage Policy
+  infrastructurePolicy:
+    name: default-namespace-3x33f
+  replicas: 0
+  vmClass:
+    name: best-effort-large
+  adminPasswordRef:
+    name: secret-1778140556035
+  maintenanceWindow:
+    duration: 6h
+    startDay: SATURDAY
+    startTime: '21:59'
+metadata:
+  name: gregorydb
+  namespace: greg01-b2y9g
