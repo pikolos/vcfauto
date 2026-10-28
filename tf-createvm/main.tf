@@ -70,7 +70,7 @@ resource "kubernetes_manifest" "vcfcli_vm" {
     }
     spec = {
       className    = "best-effort-small"
-      imageName    = "vmi-81775fc9d7e0c99bd" # noble-server-cloudimg-amd64
+      imageName    = "vmi-ab3efc20558e7f156" # noble-server-cloudimg-amd64
       storageClass = "vsan-default-storage-policy"
       powerState   = "PoweredOn"
       

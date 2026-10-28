@@ -3,7 +3,7 @@
 variable "name_prefix" {
   description = "Prefix used for naming VCF CLI resources"
   type        = string
-  default     = "vcftf-go"
+  default     = "vcfxpday-go"
 }
 
 variable "namespace" {
